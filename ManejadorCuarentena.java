@@ -1,3 +1,3 @@
-public class ManejadorCuarentena {
+public class ManejadorCuarentena extends Thread {
     
 }

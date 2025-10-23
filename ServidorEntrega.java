@@ -1,3 +1,4 @@
-public class ServidorEntrega {
+// threads consumidores
+public class ServidorEntrega extends Thread {
     
 }

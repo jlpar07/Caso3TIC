@@ -1,4 +1,4 @@
 //actua de monitor
-public class BuzonEntrada {
+public class BuzonEntrada extends Thread{
     
 }

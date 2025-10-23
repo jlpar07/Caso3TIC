@@ -1,3 +1,4 @@
-public class FiltroSpam {
+//thread analista
+public class FiltroSpam extends Thread{
     
 }
