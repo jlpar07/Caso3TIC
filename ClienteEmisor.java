@@ -13,9 +13,10 @@ public class ClienteEmisor extends Thread {
 
     @Override
     public void run(){
-        System.out.println("Comienza produccion de correos");  //revisar, ¿Será que el mensaje es correo o un print?
+        Correo mensajeInicio = generarCorreo(id, 0);
+        depositarCorreo(mensajeInicio);  
         for (int i = 0; i < correos; i++) {
-            Correo correo =generarCorreo(id, i);
+            Correo correo =generarCorreo(id, i+1);
             try {
                 Thread.sleep(100); //simula tiempo de produccion
             } catch (InterruptedException e) {
@@ -23,12 +24,24 @@ public class ClienteEmisor extends Thread {
             }
             depositarCorreo(correo);  //revisar
         }
-        System.out.println("Finaliza produccion de correos");  //revisar, ¿Será que el mensaje es correo o un print?
+        Correo mensajeFin = generarCorreo(id, correos + 1);
+        depositarCorreo(mensajeFin);
     }
 
     public Correo generarCorreo(int idCliente, int idCorreo){
-        Correo correo = new Correo(generarIdUnico(idCliente, idCorreo), (int)(Math.random()*2), this);
-        return correo;
+        String idUnico = generarIdUnico(idCliente, idCorreo);
+        boolean esSpam = Math.random() < 0.4; //40% de probabilidad de ser spam
+        
+        String tipo;
+        if (idCorreo == 0) {
+            tipo = "INICIO";
+        } else if (idCorreo == correos + 1) {
+            tipo = "FIN";
+        } else {
+            tipo = "NORMAL";
+        }
+        
+        return new Correo(tipo, idUnico, esSpam, this);
     }
 
     public void depositarCorreo(Correo correo){  

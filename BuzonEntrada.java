@@ -21,14 +21,37 @@ public class BuzonEntrada{
                 wait(); // Esperar si el buzón está lleno
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                return;
             }
         }
         correos.add(correo);
         contador++;
-        //notifyAll(); Notificar a los hilos consumidores que hay un nuevo correo
+        notifyAll(); // despertar a los filtros para análisis
     }
 
     //falta que cuando un cliente logra enviar un correo se despierte uno de los filtros
+
+    public synchronized Correo obtenerCorreo(){
+        while (correos.isEmpty()) {
+            try {
+                wait(); // Espera pasiva si no hay correos
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
+        }
+        Correo correo = correos.remove(0);
+        contador--;
+        notifyAll(); // Despierta a los CLIENTES que esperaban espacio
+        return correo;
+    }
+
+    public synchronized boolean estaVacio() {
+        return correos.isEmpty();
+    }
+
+
+       
 
 
 }

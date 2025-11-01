@@ -1,13 +1,19 @@
 public class Correo {
 
+    private String tipo;
     private String idCorreo;
-    private int flagSpam; // 0 no es spam, 1 es spam
+    private boolean flagSpam; // true es spam, false no es spam
     private ClienteEmisor clienteEmisor;
 
-    public Correo(String idCorreo, int flagSpam, ClienteEmisor clienteEmisor) {
+    public Correo(String tipo, String idCorreo, boolean flagSpam, ClienteEmisor clienteEmisor) {
+        this.tipo = tipo;
         this.idCorreo = idCorreo;
         this.flagSpam = flagSpam;
         this.clienteEmisor = clienteEmisor;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public String getIdCorreo() {
@@ -18,7 +24,7 @@ public class Correo {
         return clienteEmisor;
     }
 
-    public int getFlagSpam() {
+    public boolean isFlagSpam() {
         return flagSpam;
     }
 
