@@ -1,4 +1,4 @@
-//actua de monitor
+// actua de monitor
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,7 @@ public class BuzonEntrada{
         notifyAll(); // despertar a los filtros para análisis
     }
 
-    //falta que cuando un cliente logra enviar un correo se despierte uno de los filtros
-
+    // espera pasiva (bloqueante)
     public synchronized Correo obtenerCorreo(){
         while (correos.isEmpty()) {
             try {
@@ -46,12 +45,24 @@ public class BuzonEntrada{
         return correo;
     }
 
+    // espera pasiva con timeout para permitir verificación de FIN
+    public synchronized Correo obtenerCorreoConTimeout(long millis) {
+        if (correos.isEmpty()) {
+            try {
+                wait(millis);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
+            if (correos.isEmpty()) return null;
+        }
+        Correo correo = correos.remove(0);
+        contador--;
+        notifyAll();
+        return correo;
+    }
+
     public synchronized boolean estaVacio() {
         return correos.isEmpty();
     }
-
-
-       
-
-
 }
