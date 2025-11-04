@@ -40,11 +40,11 @@ public class Main {
         
         // Iniciar todos los threads
         System.out.println("Iniciando sistema...");
-        for (FiltroSpam filtro : filtros) {
-            filtro.start();
-        }
         for (ServidorEntrega servidor : servidores) {
             servidor.start();
+        }
+        for (FiltroSpam filtro : filtros) {
+            filtro.start();
         }
         manejador.start();
         for (ClienteEmisor cliente : clientes) {
@@ -57,10 +57,10 @@ public class Main {
             for (FiltroSpam filtro : filtros) {
                 filtro.join();
             }
+            manejador.join();
             for (ServidorEntrega servidor : servidores) {
                 servidor.join();
             }
-            manejador.join();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

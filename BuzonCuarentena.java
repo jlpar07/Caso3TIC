@@ -40,7 +40,9 @@ public class BuzonCuarentena {
     }
 
     public synchronized boolean estaVacio() {
-        return items.isEmpty();
+        boolean vacio = items.isEmpty();
+        System.out.println("DEBUG BuzonCuarentena - Elementos: " + items.size() + ", Vacío: " + vacio);
+        return vacio;
     }
 
     // El FIN para el manejador se maneja como bandera

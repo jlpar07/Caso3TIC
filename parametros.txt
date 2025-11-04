@@ -2,5 +2,5 @@ clientes=3
 mensajes_por_cliente=5
 filtros=2
 servidores=2
-capacidad_entrada=20
-capacidad_entrega=30
+capacidad_entrada=10
+capacidad_entrega=8
