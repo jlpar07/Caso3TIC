@@ -50,6 +50,10 @@ public class ManejadorCuarentena extends Thread {
     }
 
     private void enviarAEntrega(Correo mensaje) {
+        if (terminado || buzonCuarentena.hayFin()) { //si ya se está en fase de terminación
+            System.out.println("Saltando mensaje - sistema terminando: " + mensaje.getIdCorreo());
+            return;
+        }
         boolean depositado = false;
         while (!depositado && !terminado) {
             if (buzonEntrega.intentarDepositar(mensaje)) {

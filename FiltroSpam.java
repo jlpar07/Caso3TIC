@@ -47,6 +47,7 @@ public class FiltroSpam extends Thread {
             clientesRegistrados++;
             System.out.println("Cliente registrado. Total: " + clientesRegistrados);
         }
+        enviarAEntrega(correo);
     }
 
     private void manejarMensajeFin(Correo correo) {
@@ -110,7 +111,7 @@ public class FiltroSpam extends Thread {
                 buzonEntrada.estaVacio()) {
                 
                 finEnviado = true; // MARCAR que ya se envió FIN
-                System.out.println("🚀 FILTRO COORDINADOR - Enviando FIN del sistema");
+                System.out.println("FILTRO COORDINADOR - Enviando FIN del sistema");
                 enviarMensajesFin();
                 terminado = true;
             }

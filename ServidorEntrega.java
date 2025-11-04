@@ -2,12 +2,8 @@
 public class ServidorEntrega extends Thread {
 
     private final BuzonEntrega buzonEntrega;
-
-    // Estado propio del servidor
     private volatile boolean iniciado = false;
     private volatile boolean terminado = false;
-
-    // Identificador legible en logs
     private final int idServidor;
     private static int secuenciaId = 1;
 

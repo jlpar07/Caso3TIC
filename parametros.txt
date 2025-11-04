@@ -1,6 +1,6 @@
-clientes=3
-mensajes_por_cliente=5
-filtros=2
+clientes=2
+mensajes_por_cliente=7
+filtros=4
 servidores=2
 capacidad_entrada=10
 capacidad_entrega=8
